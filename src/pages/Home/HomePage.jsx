@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MovieList } from 'components/MovieList/MovieList';
 import { fetchTrendingMovies } from 'api/api';
+import { RotatingLines } from 'react-loader-spinner';
 import css from './HomePage.module.css';
 
 export const HomePage = () => {
@@ -23,7 +24,19 @@ export const HomePage = () => {
   }, []);
 
   if (loading) {
-    return <div className={css.loading}>Loading...</div>
+    return (
+    <div className={css.loading}>
+      <RotatingLines
+        visible={true}
+        height="96"
+        width="96"
+        color="grey"
+        strokeWidth="5"
+        animationDuration="0.75"
+        ariaLabel="rotating-lines-loading"
+      />
+      </div>
+    );
   }
 
   if (error) {
