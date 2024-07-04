@@ -1,0 +1,21 @@
+.homePage {
+    padding: 20px;
+}
+
+.homePage h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.loading {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 50px;
+}
+
+.error {
+    text-align: center;
+    color: red;
+    font-size: 18px;
+    margin-top: 50px;
+}

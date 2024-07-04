@@ -1,0 +1,27 @@
+.nav {
+    background-color: #333;
+    padding: 1rem;
+}
+
+.navList {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+}
+
+.navItem {
+    display: inline;
+}
+
+.navLink {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.navLinkActive {
+    font-weight: bold;
+    color: red;
+}
