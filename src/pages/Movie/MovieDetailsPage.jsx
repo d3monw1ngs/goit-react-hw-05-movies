@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, NavLink, Outlet } from 'react-router-dom';
+import { useParams, useNavigate, NavLink, Outlet } from 'react-router-dom';
 import { fetchMovieDetails } from 'api/api';
 import { RotatingLines } from 'react-loader-spinner';
 import css from './MovieDetailsPage.module.css';
 
 const MovieDetailsPage = () => {
+  const navigate = useNavigate();
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -49,17 +50,22 @@ const MovieDetailsPage = () => {
   const { poster_path, title } = movie;
 
   return (
-
     <div className={css.movieDetailsPage}>
+    <button onClick={() => navigate('/')} className={css.backBtn}>Go Back</button>
+    <div className={css.movieDetails}>
       <img 
           src={posterBaseUrl + poster_path} 
           alt={title} 
           onError={(e) => {
             e.target.onerror = null;
             e.target.src = '/path/to/fallback-image.jpg';
-          }}/>
-      <h2>{movie.title}</h2>
-      <p>{movie.overview}</p>
+          }}
+      />
+      <div>
+        <h2>{movie.title}</h2>
+        <p>{movie.overview}</p>
+      </div>
+    </div>
       <nav className={css.movieNav}>
         <NavLink to="cast" className={({ isActive }) => (isActive ? css.active : '')}>Cast</NavLink>
         <NavLink to="reviews"  className={({ isActive }) => (isActive ? css.active : '')}>Reviews</NavLink>

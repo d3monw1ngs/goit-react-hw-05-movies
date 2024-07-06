@@ -10,12 +10,16 @@
 }
 
 .movieDetails {
-    padding: 10px 0;
+    padding: 10px;
+}
+
+.movieTitle {
+    font-size: 20px;
+    margin: 5px 0;
 }
 
 .movieReleaseDate {
-    color: orangered;
+    color: rgb(219, 8, 8);
     font-size: 18px;
-    font-weight: bold;
 }
 
