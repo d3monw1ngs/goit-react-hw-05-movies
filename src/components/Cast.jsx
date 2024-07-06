@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieCast } from 'api/api';
 import { RotatingLines } from 'react-loader-spinner';
-import CastList from './CastList';
+import CastList from './CastList/CastList';
 import css from './Cast.module.css';
 
 const Cast = () => {
