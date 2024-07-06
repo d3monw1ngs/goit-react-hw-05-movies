@@ -14,11 +14,8 @@
 }
 
 .movieReleaseDate {
-    color: blue;
+    color: orangered;
     font-size: 18px;
     font-weight: bold;
 }
 
-.movieTitle {
-    color: orangered;
-}
