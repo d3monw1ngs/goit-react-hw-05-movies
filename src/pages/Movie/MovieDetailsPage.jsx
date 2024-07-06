@@ -45,13 +45,24 @@ const MovieDetailsPage = () => {
     return <div className={css.error}>{error}</div>;
   }
 
+  const posterBaseUrl = 'https://image.tmdb.org/t/p/w500';
+  const { poster_path, title } = movie;
+
   return (
-    <div className="{css.movieDetailsPage">
+
+    <div className={css.movieDetailsPage}>
+      <img 
+          src={posterBaseUrl + poster_path} 
+          alt={title} 
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = '/path/to/fallback-image.jpg';
+          }}/>
       <h2>{movie.title}</h2>
       <p>{movie.overview}</p>
       <nav className={css.movieNav}>
-        <NavLink to="cast" className={({ isActive }) => (isActive ? 'active' : '')}>Cast</NavLink>
-        <NavLink to="reviews"  className={({ isActive }) => (isActive ? 'active' : '')}>Reviews</NavLink>
+        <NavLink to="cast" className={({ isActive }) => (isActive ? css.active : '')}>Cast</NavLink>
+        <NavLink to="reviews"  className={({ isActive }) => (isActive ? css.active : '')}>Reviews</NavLink>
       </nav>
       <Outlet />
     </div>

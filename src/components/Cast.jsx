@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieCast } from 'api/api';
 import { RotatingLines } from 'react-loader-spinner';
+import CastList from './CastList';
 import css from './Cast.module.css';
 
 const Cast = () => {
@@ -13,8 +14,8 @@ const Cast = () => {
     useEffect(() => {
         const getCast = async () => {
             try {
-                const data = await fetchMovieCast(movieId);
-                setCast(data);
+                const castData = await fetchMovieCast(movieId);
+                setCast(castData);
             } catch (error) {
                 setError('Failed to fetch cast.');
             } finally {
@@ -45,16 +46,9 @@ const Cast = () => {
       }
 
   return (
-    <div className={css.castList}>
-        {cast.map(member => (
-            <div
-                key={member.cast_id}
-                className={css.castMember}>
-                    <img src={`${member.profile_path}`} 
-                         alt={member.name} />
-                    <p>{member.name} as {member.character}</p>
-            </div>
-        ))}    
+    <div className={css.castPage}>
+        <h2>Cast</h2>
+        <CastList cast={cast} />
     </div>
   );
 };

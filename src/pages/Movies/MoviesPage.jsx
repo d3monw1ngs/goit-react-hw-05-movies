@@ -27,14 +27,15 @@ const MoviesPage = () => {
 
   return (
     <div className={css.moviesPage}>
-      <form onSubmit={handleSearch}>
+      <form onSubmit={handleSearch} className={css.searchBar}>
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          className={css.searchInput}
           placeholder="Search for a movie..."
         />
-        <button type="submit">Search</button>
+        <button type="submit" className={css.searchBtn}>Search</button>
       </form>
       {loading && (
         <div className={css.loading}>
