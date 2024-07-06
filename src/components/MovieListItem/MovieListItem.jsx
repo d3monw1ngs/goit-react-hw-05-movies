@@ -6,13 +6,17 @@ const MovieListItem = ({ movie }) => {
   const posterBaseUrl = 'https://image.tmdb.org/t/p/w500'; 
   const { poster_path, title, release_date } = movie;
 
-  return (
+    return (
     <div className={css.movieItem}>
+      {/* <button onClick={handleBackClick}>Go Back</button> */}
       <Link to={`/movies/${movie.id}`}>
         <img 
           src={posterBaseUrl + poster_path} 
           alt={title} 
-          className={css.moviePoster} 
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = '/path/to/fallback-image.jpg';
+          }}
         />
         <div className={css.movieDetails}>
           <h3 className={css.movieTitle}>{title}</h3>

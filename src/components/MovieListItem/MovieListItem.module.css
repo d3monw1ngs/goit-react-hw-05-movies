@@ -12,3 +12,13 @@
 .movieDetails {
     padding: 10px 0;
 }
+
+.movieReleaseDate {
+    color: blue;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.movieTitle {
+    color: orangered;
+}
