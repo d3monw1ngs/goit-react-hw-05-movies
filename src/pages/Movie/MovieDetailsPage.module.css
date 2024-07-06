@@ -1,0 +1,25 @@
+.movieDetailsPage {
+    padding: 20px;
+}
+
+.movieNav {
+    margin-top: 20px;
+}
+
+.movieNav a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: #00f;
+}
+
+.movieNav .active {
+    font-weight: bold;
+}
+
+.loading {
+    text-align: center;
+}
+
+.error {
+    color: red;
+}

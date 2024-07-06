@@ -1,0 +1,11 @@
+.moviesPage {
+    padding: 20px;
+}
+
+.loading {
+    text-align: center;
+}
+
+.error {
+    color: red;
+}

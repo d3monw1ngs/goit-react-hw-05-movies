@@ -1,27 +1,57 @@
-import React, { useState, useEffect } from 'react';
-import { MovieList } from 'components/MovieList/MovieList';
-import { fetchTrendingMovies } from 'api/api';
+import React, { useState } from 'react';
+import  MovieList  from 'components/MovieList/MovieList';
+import { fetchMovieByQuery } from 'api/api';
+import { RotatingLines } from 'react-loader-spinner';
+import css from './MoviesPage.module.css';
 
-export const MoviesPage = () => {
+const MoviesPage = () => {
+  const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  useEffect (() => {
-    // fetch trending movies
-    const fetchMovies = async () => {
-      try {
-        const response = await fetchTrendingMovies();
-        setMovies(response.results);
-      } catch (error) {
-        console.error('Error fetching movies:', error);
-      }
-    };
-    fetchMovies();
-  }, []);
+ const handleSearch = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setError(null);
+
+  try {
+    const response = await fetchMovieByQuery(query);
+    setMovies(response);
+  } catch (error) {
+    setError('Failed to fetch movies.');
+  } finally {
+    setLoading(false);
+  }
+ };
 
   return (
-    <div>
-      <h2>Trending Movies</h2>
+    <div className={css.moviesPage}>
+      <form onSubmit={handleSearch}>
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search for a movie..."
+        />
+        <button type="submit">Search</button>
+      </form>
+      {loading && (
+        <div className={css.loading}>
+          <RotatingLines
+        visible={true}
+        height="96"
+        width="96"
+        color="grey"
+        strokeWidth="5"
+        animationDuration="0.75"
+        ariaLabel="rotating-lines-loading" />
+        </div>
+      )}
+      {error && <div className="error">{error}</div>}
       <MovieList movies={movies} />
     </div>
   );
 };
+
+export default MoviesPage;

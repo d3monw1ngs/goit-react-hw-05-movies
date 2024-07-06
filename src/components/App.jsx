@@ -1,23 +1,45 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Routes, Route} from 'react-router-dom';
-import { SharedLayout } from 'pages/Shared/SharedLayout';
-import { HomePage } from 'pages/Home/HomePage';
-import { MoviesPage } from 'pages/Movies/MoviesPage';
-import { MovieDetailsPage } from 'pages/Movie/MovieDetailsPage';
-import { NotFoundPage } from 'pages/NotFoundPage';
+import { RotatingLines } from 'react-loader-spinner';
+import SharedLayout from 'pages/Shared/SharedLayout';
+import NotFoundPage from 'pages/NotFoundPage';
+import css from './App.module.css';
 
 
-export const App = () => {
-  return (
-    <div>
-      <SharedLayout>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/movies" element={<MoviesPage />} />
-          <Route path="/movies/:movieId/*" element={<MovieDetailsPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </SharedLayout>
-    </div>
+const HomePage = lazy(() => import('../pages/Home/HomePage'));
+const MoviesPage = lazy(() => import('../pages/Movies/MoviesPage'));
+const MovieDetailsPage = lazy(() => import('../pages/Movie/MovieDetailsPage'));
+const Cast = lazy(() => import('../components/Cast'));
+const Reviews = lazy(() => import('../components/Reviews'));
+
+const App = () => {
+  return (   
+       <Suspense fallback={
+        <div className={css.loading}>
+          <RotatingLines 
+            visible={true}
+            height="96"
+            width="96"
+            color="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            ariaLabel="rotating-lines-loading" 
+          />
+        </div>
+      }>
+          <Routes>
+            <Route path="/" element={<SharedLayout />}>
+              <Route index element={<HomePage />} />
+              <Route path="movies" element={<MoviesPage />} />
+              <Route path="movies/:movieId" element={<MovieDetailsPage />}>
+                <Route path="cast" element={<Cast />} />
+                <Route path="reviews" element={<Reviews />} />
+              </Route>
+              <Route path="*" element={<NotFoundPage />} />
+            </Route>
+          </Routes>
+        </Suspense> 
   );
 };
+
+export default App;

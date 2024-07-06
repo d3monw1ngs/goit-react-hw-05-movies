@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { MovieList } from 'components/MovieList/MovieList';
+import  MovieList  from 'components/MovieList/MovieList';
 import { fetchTrendingMovies } from 'api/api';
 import { RotatingLines } from 'react-loader-spinner';
 import css from './HomePage.module.css';
 
-export const HomePage = () => {
+const HomePage = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] =useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchMovies = async () => {
+    const getTrendingMovies = async () => {
       try {
         const response = await fetchTrendingMovies();
-        setMovies(response.results);
+        setMovies(response);
       } catch (error) {
         setError('Failed to fetch trending movies.');
       } finally {
         setLoading(false);
       }
     };
-    fetchMovies();
+    getTrendingMovies();
   }, []);
 
   if (loading) {
@@ -50,3 +50,5 @@ export const HomePage = () => {
     </div>
   );
 };
+
+export default HomePage;

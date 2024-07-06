@@ -1,0 +1,8 @@
+.sharedLayout {
+    display: flex;
+    flex-direction: column;
+}
+
+.loading {
+    text-align: center;
+}
