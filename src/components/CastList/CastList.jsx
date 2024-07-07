@@ -29,7 +29,7 @@ const CastList = ({ cast }) => {
                     src={getCastImageURL(profile_path)}
                     alt={name}
                 />
-                <p>{name}</p>
+                <p className={css.castName}>{name}</p>
                 <p>{character}</p>
             </div>
         ))}
