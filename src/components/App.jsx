@@ -5,12 +5,11 @@ import SharedLayout from 'pages/Shared/SharedLayout';
 import NotFoundPage from 'pages/NotFoundPage';
 import css from './App.module.css';
 
-
 const HomePage = lazy(() => import('../pages/Home/HomePage'));
 const MoviesPage = lazy(() => import('../pages/Movies/MoviesPage'));
 const MovieDetailsPage = lazy(() => import('../pages/Movie/MovieDetailsPage'));
-const Cast = lazy(() => import('../components/Cast'));
-const Reviews = lazy(() => import('../components/Reviews'));
+const Cast = lazy(() => import('../components/Cast/Cast'));
+const Reviews = lazy(() => import('../components/Reviews/Reviews'));
 
 const App = () => {
   return (   

@@ -1,28 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchMovieCast } from 'api/api';
+import { fetchMovieReviews } from 'api/api';
 import { RotatingLines } from 'react-loader-spinner';
-import CastList from './CastList/CastList';
-import css from './Cast.module.css';
+import css from './Reviews.module.css';
 
-const Cast = () => {
+const Reviews = () => {
     const { movieId } = useParams();
-    const [cast, setCast] = useState([]);
+    const [reviews, setReviews] =useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const getCast = async () => {
+    useEffect (() => {
+        const getReviews = async () => {
             try {
-                const castData = await fetchMovieCast(movieId);
-                setCast(castData);
+                const data = await fetchMovieReviews(movieId);
+                setReviews(data);
             } catch (error) {
-                setError('Failed to fetch cast.');
+                setError('Failed to fetch reviews.');
             } finally {
                 setLoading(false);
             }
         };
-        getCast();
+        getReviews();
     }, [movieId]);
 
     if (loading) {
@@ -46,11 +45,19 @@ const Cast = () => {
       }
 
   return (
-    <div className={css.castPage}>
-        <h2>Cast</h2>
-        <CastList cast={cast} />
+    <div className={css.reviewsContainer}>
+        {reviews.length === 0 ? (
+            <p className={css.noReviewsMessage}>No reviews available.</p>
+        ) : (
+            reviews.map(review => (
+                <div key={review.id} className={css.reviewItem}>
+                    <h3>{review.author}</h3>
+                    <p>{review.content}</p>
+                </div>
+        ))
+    )}
     </div>
   );
 };
 
-export default Cast;
+export default Reviews;

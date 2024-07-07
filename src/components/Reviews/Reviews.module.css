@@ -1,0 +1,18 @@
+.reviewsContainer {
+    padding: 20px;
+}
+
+.reviewItem {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+.noReviewsMessage {
+    color: #ff0000;
+    font-size: 18px;
+    text-align: center;
+}
+
+.reviewItem h3 {
+    margin-top: 0;
+}

@@ -4,7 +4,7 @@ import css from './MovieListItem.module.css';
 
 const MovieListItem = ({ movie }) => {
     const posterBaseUrl = 'https://image.tmdb.org/t/p/w500'; 
-  const placeholderImage = '/path/to/fallback-image.jpg';
+  const placeholderImage = 'https://via.placeholder.com/500x750?text=No+Image';
   const { poster_path, title, release_date } = movie;
 
   const formatDate = (dateString) => {
@@ -12,9 +12,9 @@ const MovieListItem = ({ movie }) => {
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
+
     return (
-    <div className={css.movieItem}>
-     
+    <div className={css.movieItem}>     
       <Link to={`/movies/${movie.id}`}>
         <img 
           src={posterBaseUrl + poster_path} 
